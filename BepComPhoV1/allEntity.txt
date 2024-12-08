@@ -1,0 +1,88 @@
+﻿public class Customer
+
+    {
+        public int id { get; set; }
+
+        public string CODE { get; set; }
+        public string name { get; set; }
+        public string numberPhone { get; set; }
+
+        public string email { get; set; }
+
+        public string address { get; set; }
+
+        public string addMap  { get; set; }  // địa chỉ google map  1312321,23.1231232,23
+
+        public DateTime timeLate { get; set; } // thời gian giao cơm muộn nhất
+    }
+
+
+        public class Eating
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public EatingType type { get; set; }
+        public string describe { get; set; }
+    }
+     public class Menu
+    {
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public string dessert { get; set; } // tráng miệng
+        public string note { get; set; }
+        public virtual ICollection<MenuDetail> MenuDetails { get; set; }
+
+    }
+    public class MenuDetail
+    {
+        public int Id { get; set; }
+
+        // Liên kết với Menu
+        public int MenuId { get; set; }
+        public virtual Menu Menu { get; set; }
+
+        // Liên kết với món ăn
+        public int EatingId { get; set; }
+        public virtual Eating Eating { get; set; }
+         public int Quantity { get; set; }
+    }
+     public class Order
+    {
+        public int Id { get; set; }
+        public int CustomId { get; set; }
+        public virtual Customer Custom { get; set; }
+        public DateTime DateTimeOrder { get; set; }
+        public int PriceOrder { get; set; } // 35 40 45 50
+        public bool IsDessert { get; set; } // có tráng miệng hoặc đầy đặn
+        public StatusOder StatusOrder { get; set; }
+        public int Sum { get; set; }
+        public int Price { get; set; }
+        public string Note { get; set; }
+        public int? ShiperId { get; set; }
+        public virtual Shiper Shiper { get; set; }
+
+        // Liên kết với OrderDetails
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+    }
+      public class OrderDetail
+    {
+        public int Id { get; set; }
+
+        public int OrderId { get; set; }
+        public virtual  Order  order{ get; set; }
+
+        public int EatingId { get; set; }
+        public virtual Eating Eating { get; set; }
+
+        public int Count { get; set; }
+
+        public int Pirce {  get; set; } 
+    } 
+    public class Shiper
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }    
+        public string addree { get; set; }
+        public string email { get; set; }
+        public virtual ICollection<Order> orders { get; set; }
+    }
